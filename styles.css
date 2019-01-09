@@ -1,0 +1,40 @@
+body {
+	background-color: black;
+}
+
+#title {
+	background-image: url(assets/metal.jpg);
+	background-size: 20vw 10vw;
+	width: 20vw;
+	height: 10vw;
+	margin: auto;
+	text-align: center;
+}
+
+#titleText {
+  display: inline-block;
+	font-size:3vw;
+	margin-top: 4vw;
+}
+
+#leftPane {
+	background-color: green;
+	width:25vw;
+	padding-top:40%;
+	float: left;
+	margin-left:80px;
+}
+
+#rightPane {
+	background-color:red;
+	width:25vw;
+	padding-top:40%;
+	float: left;
+}
+
+#board{
+	background-color: blue;
+	width:40vw;
+	padding-top:40%;
+	float:left;
+}
