@@ -1,6 +1,31 @@
 body {
-	
+
 }
+
+.wrapper {
+	text-align: center;
+}
+
+.button {
+  background-color: rgb(65, 8, 0); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+	font-size: 16px;
+	margin: auto;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 
 #title {
 	background-image: url(assets/metal.jpg);
@@ -16,6 +41,13 @@ body {
 	font-size:3vw;
 	margin-top: 4vw;
 }	
+
+#gridSeparator {
+	width: 360px;
+	height: 20px;
+	background: grey;
+	margin: 1em auto;
+}
 
 .grid { margin:1em auto; border-collapse:collapse }
 .grid td {
