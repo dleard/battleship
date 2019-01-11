@@ -1,5 +1,5 @@
 body {
-	background-color: black;
+	
 }
 
 #title {
@@ -15,26 +15,18 @@ body {
   display: inline-block;
 	font-size:3vw;
 	margin-top: 4vw;
-}
+}	
 
-#leftPane {
-	background-color: green;
-	width:25vw;
-	padding-top:40%;
-	float: left;
-	margin-left:80px;
+.grid { margin:1em auto; border-collapse:collapse }
+.grid td {
+    cursor:pointer;
+    width:30px; height:30px;
+		border:1px solid #ccc;
+		background-color: blue;
+    text-align:center;
+    font-family:sans-serif; font-size:13px
 }
-
-#rightPane {
-	background-color:red;
-	width:25vw;
-	padding-top:40%;
-	float: left;
-}
-
-#board{
-	background-color: blue;
-	width:40vw;
-	padding-top:40%;
-	float:left;
+.grid td.clicked {
+    background-color:yellow;
+    font-weight:bold; color:red;
 }
