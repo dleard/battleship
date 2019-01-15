@@ -1,5 +1,15 @@
 var lastClicked;
-var attackGrid = createGrid(11,11,function(el,row,col,i){
+
+var hitBox = document.createElement('div');
+hitBox.id = 'hit';
+hitBox.style.visibility='hidden';
+document.body.appendChild(hitBox);
+
+function removeHitBox() {
+  hitBox.style.visibility='hidden';
+}
+
+var attackGrid = createGrid(11,11,function(el,row,col){
     var cellClicked = [row, col];
     let hit = false;
     enemyShips.carrier.coords.forEach(function (coord) {
@@ -9,25 +19,26 @@ var attackGrid = createGrid(11,11,function(el,row,col,i){
     });
     if (hit === true) {
       console.log(`HIT on the enemy ${enemyShips.carrier.name}`);
-      var hitBox = document.createElement('div');
       hitBox.id = 'hit';
-      hitBox.innerHTML = '<h2>HIT!</h2>'
-      document.body.appendChild(hitBox);
+      hitBox.innerHTML = '<h2>HIT!</h2>';
+      hitBox.style.visibility='visible';
+      
       el.className = 'hit'; 
     }else {
-      var missBox = document.createElement('div');
-      missBox.id = 'miss';
-      missBox.innerHTML = '<h2>MISS!</h2>'
-      document.body.appendChild(missBox); 
+      hitBox.id = 'miss';
+      hitBox.innerHTML = '<h2>MISS!</h2>';
+      hitBox.style.visibility='visible'; 
+      
       el.className = 'miss';
     }
+    setTimeout(removeHitBox, 500);
 
     // el.className='clicked';
     // if (lastClicked) lastClicked.className='';
     // lastClicked = el;
 });
 
-var defendGrid = createGrid(11,11,function(el,row,col,i){
+var defendGrid = createGrid(11,11,function(el,row,col){
 
 	el.className='clicked';
 	if (lastClicked) lastClicked.className='';
