@@ -1,3 +1,5 @@
+//const createGrid = require('createGrid');
+
 var lastClicked;
 var attackGrid = clickableGrid(11,11,function(el,row,col,i){
     console.log("You clicked on element:",el);
@@ -21,7 +23,6 @@ var defendGrid = clickableGrid(11,11,function(el,row,col,i){
 });
      
 function clickableGrid( rows, cols, callback ){
-	var i = 0;
 	var grid = document.createElement('table');
 	grid.className = 'grid';
 	
@@ -78,6 +79,17 @@ startButtonDiv.appendChild((startButton))
 startButton.className = 'button';
 startButton.innerHTML = '<h2>START</h2>'
 startButton.addEventListener('click', (function() {
-	alert('clicked start button');
+	startButton.style.display = 'none';
+  document.getElementById('attackBoard').style.display = 'block';
+  document.getElementById('attackBoard').style.width = '330px';
+  document.getElementById('attackBoard').style.margin = 'auto';
+  document.getElementById('gridSeparator').style.display = 'block';
+  document.getElementById('gridSeparator').style.width = '330px';
+  document.getElementById('gridSeparator').style.margin = 'auto';
+  document.getElementById('defendBoard').style.display = 'block';
+  document.getElementById('defendBoard').style.width = '330px';
+  document.getElementById('defendBoard').style.margin = 'auto';
+
+	
 }))
 document.body.appendChild(startButtonDiv);
