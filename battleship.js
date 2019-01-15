@@ -1,4 +1,4 @@
-var lastClicked;
+//var lastClicked;
 
 var hitBox = document.createElement('div');
 hitBox.id = 'hit';
@@ -31,7 +31,7 @@ var attackGrid = createGrid(11,11,function(el,row,col){
       
       el.className = 'miss';
     }
-    setTimeout(removeHitBox, 500);
+    setTimeout(removeHitBox, 1000);
 
     // el.className='clicked';
     // if (lastClicked) lastClicked.className='';
@@ -40,9 +40,9 @@ var attackGrid = createGrid(11,11,function(el,row,col){
 
 var defendGrid = createGrid(11,11,function(el,row,col){
 
-	el.className='clicked';
-	if (lastClicked) lastClicked.className='';
-	lastClicked = el;
+	// el.className='clicked';
+	// if (lastClicked) lastClicked.className='';
+	// lastClicked = el;
 });
 
 var enemyShips = {
@@ -68,17 +68,17 @@ var enemyShips = {
 
 document.body.appendChild(attackGrid);
 document.getElementById('grid').id = 'attackBoard';
-document.getElementById('attackBoard').style.display = 'none';
+document.getElementById('attackBoard').style.visibility = 'hidden';
 
 
 var gridSeparator = document.createElement('div');
 gridSeparator.id = 'gridSeparator';
 document.body.appendChild(gridSeparator);
-document.getElementById('gridSeparator').style.display = 'none';
+document.getElementById('gridSeparator').style.visibility = 'hidden';
 
 document.body.appendChild(defendGrid);
 document.getElementById('grid').id = 'defendBoard';
-document.getElementById('defendBoard').style.display = 'none';
+document.getElementById('defendBoard').style.visibility = 'hidden';
 
 var startButtonDiv = document.createElement('div');
 startButtonDiv.className = 'wrapper';
@@ -89,13 +89,13 @@ startButton.className = 'button';
 startButton.innerHTML = '<h2>START</h2>'
 startButton.addEventListener('click', (function() {
 	startButton.style.display = 'none';
-  document.getElementById('attackBoard').style.display = 'block';
+  document.getElementById('attackBoard').style.visibility = 'visible';
   document.getElementById('attackBoard').style.width = '330px';
   document.getElementById('attackBoard').style.margin = 'auto';
-  document.getElementById('gridSeparator').style.display = 'block';
+  document.getElementById('gridSeparator').style.visibility = 'visible';
   document.getElementById('gridSeparator').style.width = '330px';
   document.getElementById('gridSeparator').style.margin = 'auto';
-  document.getElementById('defendBoard').style.display = 'block';
+  document.getElementById('defendBoard').style.visibility = 'visible';
   document.getElementById('defendBoard').style.width = '330px';
   document.getElementById('defendBoard').style.margin = 'auto';
 }))
