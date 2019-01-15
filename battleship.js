@@ -1,27 +1,47 @@
-//const createGrid = require('createGrid');
-
 var lastClicked;
 var attackGrid = clickableGrid(11,11,function(el,row,col,i){
-    console.log("You clicked on element:",el);
-    console.log("You clicked on row:",row);
-    console.log("You clicked on col:",col);
+    var cellClicked = [row, col];
+    console.log(...enemyShips.carrier.coords);
+    enemyShips.carrier.coords.forEach(function (coord) {
+      if (cellClicked[0] === coord[0] && cellClicked[1] === coord[1]) {
+        console.log(`HIT on the enemy ${enemyShips.carrier.name}`);
+      }  
+    });
 
     el.className='clicked';
     if (lastClicked) lastClicked.className='';
     lastClicked = el;
 });
 
-var defendGrid = clickableGrid(11,11,function(el,row,col,i){
-	console.log("You clicked on element:",el);
-	console.log("You clicked on row:",row);
-	console.log("You clicked on col:",col);
-	console.log("You clicked on item #:",i);
+var defendGrid = createGrid(11,11,function(el,row,col,i){
 
 	el.className='clicked';
 	if (lastClicked) lastClicked.className='';
 	lastClicked = el;
 });
-     
+
+var enemyShips = {
+  carrier: {
+    name: 'carrier',
+    sunk: false,
+    hits: [],
+    coords: [[1, 1], [1, 2], [1, 3],[1, 4],[1, 5]]
+  },
+  battleShip: {
+    sunk: false
+  },
+  cruiser: {
+    sunk: false
+  },
+  submarine: {
+    sunk: false
+  },
+  destroyer: {
+    sunk: false
+  }
+}
+
+
 function clickableGrid( rows, cols, callback ){
 	var grid = document.createElement('table');
 	grid.className = 'grid';
@@ -89,7 +109,5 @@ startButton.addEventListener('click', (function() {
   document.getElementById('defendBoard').style.display = 'block';
   document.getElementById('defendBoard').style.width = '330px';
   document.getElementById('defendBoard').style.margin = 'auto';
-
-	
 }))
 document.body.appendChild(startButtonDiv);

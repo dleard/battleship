@@ -1,4 +1,4 @@
-module.exports = function clickableGrid( rows, cols, callback ){
+function createGrid( rows, cols, callback ){
 	var i = 0;
 	var grid = document.createElement('table');
 	grid.className = 'grid';
