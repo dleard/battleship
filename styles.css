@@ -15,7 +15,8 @@ body {
   text-decoration: none;
   display: inline-block;
 	font-size: 16px;
-	margin: auto;
+  margin: auto;
+  margin-top: 200px;
 }
 
 .button:hover {background-color: #3e8e41}
@@ -42,6 +43,26 @@ body {
 	margin-top: 4vw;
 }	
 
+#hit {
+  width: 80px;
+	height: 50px;
+	background: red;
+  margin: 1em auto;
+  text-align: center;
+  border: solid black 1px;
+  line-height: 10px;
+}
+
+#miss {
+  width: 80px;
+	height: 50px;
+	background: white;
+  margin: 1em auto;
+  text-align: center;
+  border: solid black 1px;
+  line-height: 10px;
+}
+
 #gridSeparator {
 	width: 360px;
 	height: 20px;
@@ -60,5 +81,12 @@ body {
 }
 .grid td.clicked {
     background-color:yellow;
-    font-weight:bold; color:red;
+}
+
+.grid td.hit {
+  background-color:red;
+}
+
+.grid td.miss {
+  background-color:white;
 }

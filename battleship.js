@@ -1,16 +1,30 @@
 var lastClicked;
-var attackGrid = clickableGrid(11,11,function(el,row,col,i){
+var attackGrid = createGrid(11,11,function(el,row,col,i){
     var cellClicked = [row, col];
-    console.log(...enemyShips.carrier.coords);
+    let hit = false;
     enemyShips.carrier.coords.forEach(function (coord) {
       if (cellClicked[0] === coord[0] && cellClicked[1] === coord[1]) {
-        console.log(`HIT on the enemy ${enemyShips.carrier.name}`);
-      }  
+        hit = true;
+      }
     });
+    if (hit === true) {
+      console.log(`HIT on the enemy ${enemyShips.carrier.name}`);
+      var hitBox = document.createElement('div');
+      hitBox.id = 'hit';
+      hitBox.innerHTML = '<h2>HIT!</h2>'
+      document.body.appendChild(hitBox);
+      el.className = 'hit'; 
+    }else {
+      var missBox = document.createElement('div');
+      missBox.id = 'miss';
+      missBox.innerHTML = '<h2>MISS!</h2>'
+      document.body.appendChild(missBox); 
+      el.className = 'miss';
+    }
 
-    el.className='clicked';
-    if (lastClicked) lastClicked.className='';
-    lastClicked = el;
+    // el.className='clicked';
+    // if (lastClicked) lastClicked.className='';
+    // lastClicked = el;
 });
 
 var defendGrid = createGrid(11,11,function(el,row,col,i){
@@ -39,42 +53,6 @@ var enemyShips = {
   destroyer: {
     sunk: false
   }
-}
-
-
-function clickableGrid( rows, cols, callback ){
-	var grid = document.createElement('table');
-	grid.className = 'grid';
-	
-	var tr = grid.appendChild(document.createElement('tr'));
-	var letters = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-	
-	for (var c = 0; c < cols; c++) {
-		var cell = tr.appendChild(document.createElement('td'));     
-		cell.innerText = letters[c];
-		cell.style.backgroundColor = 'white';
-	}
-
-	for (var r = 1;r < rows; r++){
-		var tr = grid.appendChild(document.createElement('tr'));
-		for (var c = 0;c < cols; c++){
-			var cell = tr.appendChild(document.createElement('td'));
-			var num = 1;
-			if (c === 0) {
-				cell.innerText = r;
-				cell.style.backgroundColor = 'white';
-				num++;
-			} else {
-				cell.addEventListener('click',(function(el,r,c,i){
-					return function(){
-						callback(el,r,c);
-					}
-				})(cell,r,c),false);
-			}
-		}
-	}
-	grid.id = 'grid';
-	return grid;
 }
 
 document.body.appendChild(attackGrid);
