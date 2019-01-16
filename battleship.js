@@ -9,27 +9,49 @@ function removeHitBox() {
   hitBox.style.visibility='hidden';
 }
 
+var p1Attacks = [];
+
 const attackGrid = createGrid(11,11,function(el,row,col){
     const cellClicked = [row, col];
     let hit = false;
-    enemyShips.carrier.coords.forEach(function (coord) {
-      if (cellClicked[0] === coord[0] && cellClicked[1] === coord[1]) {
-        hit = true;
+    let duplicate = false;
+    for (let i = 0; i < p1Attacks.length; i++) {
+      if (p1Attacks[i][0] === cellClicked[0] && p1Attacks[i][1] === cellClicked[1]) {
+        duplicate = true;
+        hitBox.id = 'attacked';
+        hitBox.innerHTML = '<h2>NOPE!</h2>';
+        hitBox.style.visibility = 'visible';
       }
-    });
-    if (hit === true) {
-      console.log(`HIT on the enemy ${enemyShips.carrier.name}`);
-      hitBox.id = 'hit';
-      hitBox.innerHTML = '<h2>HIT!</h2>';
-      hitBox.style.visibility='visible';
+    }
+    
+    if (duplicate === false) {
+      p1Attacks.push([cellClicked[0], cellClicked[1]]);
+      enemyShips.carrier.coords.forEach(function (coord) {
+        if (cellClicked[0] === coord[0] && cellClicked[1] === coord[1]) {
+          hit = true;
+          enemyShips.carrier.hits++;
+          if (enemyShips.carrier.hits === 5) {
+            enemyShips.carrier.sunk = true;
+            console.log(`Sank enemy ${enemyShips.carrier.name} (${enemyShips.carrier.hits})`)
+          }
+        }
+      });
+      if (hit === true) {
+        console.log(`HIT on the enemy ${enemyShips.carrier.name}`);
+        hitBox.id = 'hit';
+        hitBox.innerHTML = '<h2>HIT!</h2>';
+        hitBox.style.visibility='visible';
+        
+        el.className = 'hit'; 
+      }
       
-      el.className = 'hit'; 
-    }else {
-      hitBox.id = 'miss';
-      hitBox.innerHTML = '<h2>MISS!</h2>';
-      hitBox.style.visibility='visible'; 
-      
-      el.className = 'miss';
+      if (hit === false) {
+        hitBox.id = 'miss';
+        hitBox.innerHTML = '<h2>MISS!</h2>';
+        hitBox.style.visibility='visible'; 
+        
+        el.className = 'miss';
+      }
     }
     setTimeout(removeHitBox, 1000);
 
@@ -49,7 +71,7 @@ const enemyShips = {
   carrier: {
     name: 'carrier',
     sunk: false,
-    hits: [],
+    hits: 0,
     coords: [[1, 1], [1, 2], [1, 3],[1, 4],[1, 5]]
   },
   battleShip: {

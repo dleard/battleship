@@ -69,6 +69,16 @@ body {
   line-height: 10px;
 }
 
+#attacked {
+  width: 80px;
+	height: 50px;
+	background: yellow;
+  margin: 1em auto;
+  text-align: center;
+  border: solid black 1px;
+  line-height: 10px;
+}
+
 #gridSeparator {
 	width: 360px;
 	height: 15px;
