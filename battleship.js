@@ -1,16 +1,16 @@
 //var lastClicked;
 
-var hitBox = document.createElement('div');
+const hitBox = document.createElement('div');
 hitBox.id = 'hit';
 hitBox.style.visibility='hidden';
-document.body.appendChild(hitBox);
+document.body.appendChild(hitBox); 
 
 function removeHitBox() {
   hitBox.style.visibility='hidden';
 }
 
-var attackGrid = createGrid(11,11,function(el,row,col){
-    var cellClicked = [row, col];
+const attackGrid = createGrid(11,11,function(el,row,col){
+    const cellClicked = [row, col];
     let hit = false;
     enemyShips.carrier.coords.forEach(function (coord) {
       if (cellClicked[0] === coord[0] && cellClicked[1] === coord[1]) {
@@ -38,14 +38,14 @@ var attackGrid = createGrid(11,11,function(el,row,col){
     // lastClicked = el;
 });
 
-var defendGrid = createGrid(11,11,function(el,row,col){
+const defendGrid = createGrid(11,11,function(el,row,col){
 
 	// el.className='clicked';
 	// if (lastClicked) lastClicked.className='';
 	// lastClicked = el;
 });
 
-var enemyShips = {
+const enemyShips = {
   carrier: {
     name: 'carrier',
     sunk: false,
@@ -71,7 +71,7 @@ document.getElementById('grid').id = 'attackBoard';
 document.getElementById('attackBoard').style.visibility = 'hidden';
 
 
-var gridSeparator = document.createElement('div');
+const gridSeparator = document.createElement('div');
 gridSeparator.id = 'gridSeparator';
 document.body.appendChild(gridSeparator);
 document.getElementById('gridSeparator').style.visibility = 'hidden';
@@ -80,23 +80,17 @@ document.body.appendChild(defendGrid);
 document.getElementById('grid').id = 'defendBoard';
 document.getElementById('defendBoard').style.visibility = 'hidden';
 
-var startButtonDiv = document.createElement('div');
+const startButtonDiv = document.createElement('div');
 startButtonDiv.className = 'wrapper';
 
-var startButton = document.createElement('button');
+const startButton = document.createElement('button');
 startButtonDiv.appendChild((startButton))
 startButton.className = 'button';
 startButton.innerHTML = '<h2>START</h2>'
 startButton.addEventListener('click', (function() {
 	startButton.style.display = 'none';
   document.getElementById('attackBoard').style.visibility = 'visible';
-  document.getElementById('attackBoard').style.width = '330px';
-  document.getElementById('attackBoard').style.margin = 'auto';
   document.getElementById('gridSeparator').style.visibility = 'visible';
-  document.getElementById('gridSeparator').style.width = '330px';
-  document.getElementById('gridSeparator').style.margin = 'auto';
   document.getElementById('defendBoard').style.visibility = 'visible';
-  document.getElementById('defendBoard').style.width = '330px';
-  document.getElementById('defendBoard').style.margin = 'auto';
 }))
 document.body.appendChild(startButtonDiv);

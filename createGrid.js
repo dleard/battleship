@@ -1,32 +1,29 @@
 function createGrid( rows, cols, callback ){
-	var i = 0;
-	var grid = document.createElement('table');
+	const grid = document.createElement('table');
 	grid.className = 'grid';
 	
-	var tr = grid.appendChild(document.createElement('tr'));
-	var letters = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+	const tr = grid.appendChild(document.createElement('tr'));
+	const letters = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 	
-	for (var c = 0; c < cols; c++) {
-		var cell = tr.appendChild(document.createElement('td'));     
+	for (let c = 0; c < cols; c++) {
+		const cell = tr.appendChild(document.createElement('td'));     
 		cell.innerText = letters[c];
 		cell.style.backgroundColor = 'white';
 	}
 
-	for (var r = 1;r < rows; r++){
-		var tr = grid.appendChild(document.createElement('tr'));
+	for (let r = 1;r < rows; r++){
+		const tr = grid.appendChild(document.createElement('tr'));
 		for (var c = 0;c < cols; c++){
-			var cell = tr.appendChild(document.createElement('td'));
-			var num = 1;
+			const cell = tr.appendChild(document.createElement('td'));
 			if (c === 0) {
 				cell.innerText = r;
 				cell.style.backgroundColor = 'white';
-				num++;
 			} else {
-				cell.addEventListener('click',(function(el,r,c,i){
+				cell.addEventListener('click',(function(el,r,c){
 					return function(){
 						callback(el,r,c);
 					}
-				})(cell,r,c),false);
+				})(cell,r,c));
 			}
 		}
 	}
