@@ -1,4 +1,4 @@
-function createGrid( rows, cols, callback ){
+function createGrid( rows, cols, leftClickCall, hoverCall, outCall){
 	const grid = document.createElement('table');
 	grid.className = 'grid';
 	
@@ -19,14 +19,19 @@ function createGrid( rows, cols, callback ){
 				cell.innerText = r;
 				cell.style.backgroundColor = 'white';
 			} else {
-				// cell.addEventListener('click',(function(el,r,c){
-				// 	return function(){
-				// 		callback(el,r,c);
-				// 	}
-        // })(cell,r,c));
-        cell.addEventListener('hover', (function(el,r,c){
+        cell.addEventListener('click', (function(el,r,c){
 					return function(){
-						callback(el,r,c);
+						leftClickCall(el,r,c);
+					}
+        })(cell,r,c));
+        cell.addEventListener('mouseover', (function(el,r,c){
+					return function(){
+						hoverCall(el,r,c);
+					}
+        })(cell,r,c));
+        cell.addEventListener('mouseout', (function(el,r,c){
+					return function(){
+						outCall(el,r,c);
 					}
         })(cell,r,c));
 			}

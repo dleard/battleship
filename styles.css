@@ -132,3 +132,7 @@ body {
 .grid td.miss {
   background-color:white;
 }
+
+.grid td.ship {
+  background-color:black;
+}

@@ -142,10 +142,10 @@ startButton.addEventListener('click', (function() {
   gameFlags.setup = 1;
   gameFlags.turn = 'p1';
   startButton.style.display = 'none';
-  // document.getElementById('attackBoard').style.visibility = 'visible';
-  // document.getElementById('gridSeparator').style.visibility = 'visible';
-  // document.getElementById('defendBoard').style.visibility = 'visible';
+  document.getElementById('attackBoard').style.visibility = 'visible';
+  document.getElementById('gridSeparator').style.visibility = 'visible';
+  document.getElementById('defendBoard').style.visibility = 'visible';
   console.log(gameFlags);
-  setup();
-}))
+  // setup();
+}));
 document.body.appendChild(startButtonDiv);
