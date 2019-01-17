@@ -18,18 +18,25 @@ function click(el, row, col){
   ship.style.width = '30px';
   ship.style.backgroundColor = 'black';
   
-  cell[index].appendChild(ship);
   if (!shiftFlag.vertical) {
     const index = (row * 11) + col;
     
     for (let i = 0; i < 5; i++) {
+      const ship = document.createElement('div');
+      ship.style.height = '30px';
+      ship.style.width = '30px';
+      ship.style.backgroundColor = 'black';
       cell[index+i].appendChild(ship);
     }
   } else {
     const index = (row * 11) + col;
     
     for (let i = 0; i < 5; i++) {
-      cell[index+(i*11)].className = 'ship';
+      const ship = document.createElement('div');
+      ship.style.height = '30px';
+      ship.style.width = '30px';
+      ship.style.backgroundColor = 'black';
+      cell[index+(i*11)].appendChild(ship);
     }
   }
 }
