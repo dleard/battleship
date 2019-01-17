@@ -5,6 +5,12 @@ body {
   background-size: cover;
 }
 
+.ships {
+  height: 30px;
+  width: 30px;
+  background-color: silver;
+}
+
 .wrapper {
 	text-align: center;
 }
