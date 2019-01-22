@@ -75,9 +75,9 @@ const attackGrid = createGrid(11,11,function(el,row,col){
 });
 
 const defendGrid = createGrid(11,11,function(el,row,col){
-  const cellClicked = [row, col];
   
 });
+
 
 document.body.appendChild(attackGrid);
 document.getElementById('grid').id = 'attackBoard';
@@ -92,6 +92,17 @@ document.getElementById('gridSeparator').style.visibility = 'hidden';
 document.body.appendChild(defendGrid);
 document.getElementById('grid').id = 'defendBoard';
 document.getElementById('defendBoard').style.visibility = 'hidden';
+
+const cell = document.getElementById('defendBoard').getElementsByTagName('td');
+
+for (ship in p1Ships) {
+  p1Ships[ship].coords.forEach(function(coordinate) {
+      const index = (coordinate[0] * 11) + coordinate[1];
+      const shipBlock = document.createElement('div');
+      shipBlock.className = 'ships';
+      cell[index].appendChild(shipBlock);
+  });
+}
 
 const startButtonDiv = document.createElement('div');
 startButtonDiv.className = 'wrapper';
