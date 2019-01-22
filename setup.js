@@ -1,8 +1,4 @@
-const instructions = document.createElement('div');
-instructions.id = 'setupInstructions';
-instructions.style.visibility='hidden';
-instructions.innerHTML = '<h2>Set up your ships!</h2><br/><p>Press Shift to switch horizontal or vertical</p>';
-document.body.appendChild(instructions);
+
 
 const shiftFlag = {
   vertical: false
@@ -28,6 +24,93 @@ const ships = {
   }
 }
 
+const player1Ships = {
+  carrier: {
+    name: 'carrier',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  battleship: {
+    name: 'battleship',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  cruiser : {
+    name: 'cruiser',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  submarine: {
+    name: 'submarine',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  destroyer: {
+    name: 'destroyer',
+    sunk: false,
+    hits: 0,
+    coords: []
+  }
+};
+
+const player2Ships = {
+  carrier: {
+    name: 'carrier',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  battleship: {
+    name: 'battleship',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  cruiser : {
+    name: 'cruiser',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  submarine: {
+    name: 'submarine',
+    sunk: false,
+    hits: 0,
+    coords: []
+  },
+  destroyer: {
+    name: 'destroyer',
+    sunk: false,
+    hits: 0,
+    coords: []
+  }
+};
+
+// const startGame = () => {
+//   const p1 = player1Ships;
+//   const p2 = player2Ships;
+//   console.log('here');
+//   $.ajax({
+//     type: "POST",
+//     url: "game",
+//       contentType: "application/json",
+//     dataType: "json",
+//     data: JSON.stringify({
+//       test: 'hello',
+//       test2: 'hi'
+//     }),
+//     success: function() {
+//       alert('success');
+//     }
+//   });
+// }
+
+let setupTurn = 'p1';
+
 const shipsKeys = Object.keys(ships).slice(2);
 let shipsKeysIndex = 0;
 
@@ -43,6 +126,8 @@ function click(el, row, col){
       const ship = document.createElement('div');
       ship.className = 'ships';
       cell[index+i].appendChild(ship);
+      if (setupTurn === 'p1') { player1Ships[ships.current].coords.push([row, col + i]); }
+      else if  (setupTurn === 'p2') { player2Ships[ships.current].coords.push([row, col + i]); }
     }
   } else {
     const index = (row * 11) + col;
@@ -51,13 +136,35 @@ function click(el, row, col){
       const ship = document.createElement('div');
       ship.className = 'ships';
       cell[index+(i*11)].appendChild(ship);
+      if (setupTurn === 'p1') { player1Ships[ships.current].coords.push([row + i * 11, col]); }
+      else if (setupTurn === 'p2') { player2Ships[ships.current].coords.push([row + i * 11, col]); }
     }
   }
 
   ships.shipsToPlace--;
   console.log(ships.shipsToPlace);
-  if (ships.shipsToPlace === 0) {
-    doneButton.style.visibility = 'visible';
+  console.log(player1Ships);
+  console.log(player2Ships);
+  if (ships.shipsToPlace === 0 && setupTurn === 'p1') {
+    doneButton.style.display = "block";
+    doneButton.style.width = "100px";
+    doneButton.style.margin = 'auto';
+  } else if (ships.shipsToPlace === 0 && setupTurn === 'p2') {
+    startGameButton.style.display = 'block';
+    startGameButton.style.width = '100px';
+    startGameButton.style.margin = 'auto';
+    const p1Ships = document.createElement("input");
+    p1Ships.setAttribute("type", "text");
+    p1Ships.setAttribute("name", 'p1Ships');
+    p1Ships.setAttribute("value", JSON.stringify(player1Ships));
+    const p2Ships = document.createElement('input');
+    p2Ships.setAttribute("type", "text");
+    p2Ships.setAttribute("name", 'p2Ships');
+    p2Ships.setAttribute("value", JSON.stringify(player2Ships));
+    const startForm = document.getElementById('startGameForm');
+    startForm.appendChild(p1Ships);
+    startForm.appendChild(p2Ships)
+
   } else {
       shipsKeysIndex++;
       ships.current = shipsKeys[shipsKeysIndex];
@@ -129,13 +236,34 @@ const doneButton = document.createElement('button');
 doneButtonDiv.appendChild((doneButton))
 doneButton.className = '';
 doneButton.position = 'relative;';
-doneButton.innerHTML = '<h2>Done</h2>';
-doneButton.style.visibility = 'hidden';
+doneButton.innerHTML = '<h2>Player 1 \n  Done</h2>';
+doneButton.style.display = "none";
 doneButton.addEventListener('click', (function() {
+  setupTurn = 'p2';
+  const newSetupGrid = createGrid(11,11,click, hover, out);
+  document.body.replaceChild(newSetupGrid, setupBoard);
+  document.getElementById('grid').id = 'setupBoard';
+  ships.shipsToPlace = 5;
+  ships.current = 'carrier';
+  shipsKeysIndex = 0;
+  doneButton.style.display = 'none';
 }));
+
+const startGameForm = document.createElement('form');
+startGameForm.method = "POST";
+startGameForm.action = "game"
+startGameForm.id = 'startGameForm';
+
+const startGameButton = document.createElement('input');
+startGameButton.value = 'Start Game';
+startGameButton.type = 'submit';
+startGameButton.style.display = 'none';
+
+startGameForm.appendChild(startGameButton);
 
 document.body.appendChild(setupGrid);
 document.getElementById('grid').id = 'setupBoard';
 
 document.body.appendChild(verticalButtonDiv);
 document.body.appendChild(doneButtonDiv);
+document.body.appendChild(startGameForm);

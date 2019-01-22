@@ -12,8 +12,11 @@ app.get('/', (req,res) => {
   res.render("setup");
 });
 
-app.get('/game', (req,res) => {
-  res.render("game");
+app.post('/game', (req,res) => {
+  const {p1Ships} = req.body;
+  const {p2Ships} = req.body;
+  const shipVars = {p1Ships, p2Ships};
+  res.render("game", shipVars);
 });
 
 app.listen(PORT, () => {
