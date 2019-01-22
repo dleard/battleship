@@ -12,7 +12,7 @@ const p1Attacks = [];
 
 const shipsKeys = Object.keys(p1Ships);
 
-const attackGrid = createGrid(11,11,function(el,row,col){
+const attackGridP1 = createGrid(11,11,function(el,row,col){
     const cellClicked = [row, col];
     let hit = false;
     let duplicate = false;
@@ -61,14 +61,14 @@ const attackGrid = createGrid(11,11,function(el,row,col){
 
 });
 
-const defendGrid = createGrid(11,11,function(el,row,col){
+const defendGridP1 = createGrid(11,11,function(el,row,col){
   
 });
 
 
-document.body.appendChild(attackGrid);
-document.getElementById('grid').id = 'attackBoard';
-document.getElementById('attackBoard').style.visibility = 'hidden';
+document.body.appendChild(attackGridP1);
+document.getElementById('grid').id = 'attackBoardP1';
+document.getElementById('attackBoardP1').style.visibility = 'hidden';
 
 
 const gridSeparator = document.createElement('div');
@@ -76,11 +76,11 @@ gridSeparator.id = 'gridSeparator';
 document.body.appendChild(gridSeparator);
 document.getElementById('gridSeparator').style.visibility = 'hidden';
 
-document.body.appendChild(defendGrid);
-document.getElementById('grid').id = 'defendBoard';
-document.getElementById('defendBoard').style.visibility = 'hidden';
+document.body.appendChild(defendGridP1);
+document.getElementById('grid').id = 'defendBoardP1';
+document.getElementById('defendBoardP1').style.visibility = 'hidden';
 
-const cell = document.getElementById('defendBoard').getElementsByTagName('td');
+const cell = document.getElementById('defendBoardP1').getElementsByTagName('td');
 
 for (ship in p1Ships) {
   p1Ships[ship].coords.forEach(function(coordinate) {
@@ -100,8 +100,8 @@ startButton.className = 'button';
 startButton.innerHTML = '<h2>START</h2>'
 startButton.addEventListener('click', (function() {
   startButton.style.display = 'none';
-  document.getElementById('attackBoard').style.visibility = 'visible';
+  document.getElementById('attackBoardP1').style.visibility = 'visible';
   document.getElementById('gridSeparator').style.visibility = 'visible';
-  document.getElementById('defendBoard').style.visibility = 'visible';
+  document.getElementById('defendBoardP1').style.visibility = 'visible';
 }));
 document.body.appendChild(startButtonDiv);
