@@ -4,19 +4,6 @@ hitBox.id = 'hit';
 hitBox.style.visibility='hidden';
 document.body.appendChild(hitBox); 
 
-const instructions = document.createElement('div');
-instructions.id = 'setupInstructions';
-instructions.style.visibility='hidden';
-instructions.innerHTML = '<h2>Set up your ships!</h2><br/><p>Press Shift to switch horizontal or vertical</p>';
-document.body.appendChild(instructions);
-
-const gameFlags = {
-  turn: 0,
-  playing: 0,
-  setup: 0,
-  end: 0
-}
-
 function removeHitBox() {
   hitBox.style.visibility='hidden';
 }
@@ -112,9 +99,6 @@ startButtonDiv.appendChild((startButton))
 startButton.className = 'button';
 startButton.innerHTML = '<h2>START</h2>'
 startButton.addEventListener('click', (function() {
-  gameFlags.playing = 1;
-  gameFlags.setup = 1;
-  gameFlags.turn = 'p1';
   startButton.style.display = 'none';
   document.getElementById('attackBoard').style.visibility = 'visible';
   document.getElementById('gridSeparator').style.visibility = 'visible';
