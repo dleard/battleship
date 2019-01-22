@@ -224,8 +224,8 @@ verticalButton.position = 'relative;'
 verticalButton.innerHTML = '<h2>Horizontal</h2>'
 verticalButton.addEventListener('click', (function() {
   shiftFlag.vertical = !shiftFlag.vertical;
-  if (shiftFlag.vertical) verticalButton.innerHTML = '<h2>Horizontal</h2>'
-  else verticalButton.innerHTML = '<h2>Vertical</h2>'
+  if (shiftFlag.vertical) { verticalButton.innerHTML = '<h2>Horizontal</h2>'; }
+  else { verticalButton.innerHTML = '<h2>Vertical</h2>'; }
 }));
 
 const doneButtonDiv = document.createElement('div');

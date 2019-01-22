@@ -76,9 +76,7 @@ const attackGrid = createGrid(11,11,function(el,row,col){
 
 const defendGrid = createGrid(11,11,function(el,row,col){
   const cellClicked = [row, col];
-  if (event.shiftKey) {
-
-  }
+  
 });
 
 document.body.appendChild(attackGrid);
